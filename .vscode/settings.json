@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/Users/yerai/miniconda3/envs/DAW-Practica/bin/python",
+    "python.linting.pylintArgs": ["--load-plugins=pylint_django"],
+}

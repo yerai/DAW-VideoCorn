@@ -1,0 +1,69 @@
+html, body{
+    /* Para alinear Verticalmente el Panel */
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+.login-panel{
+    /*Atributos del Panel*/
+    background-color: black;
+    border-radius: 20px;
+    padding:30px;
+
+    /* Sombra del Panel */
+    -webkit-box-shadow: 0px 0px 300px 200px rgba(0,0,0,0.54);
+    -moz-box-shadow: 0px 0px 300px 200px rgba(0,0,0,0.54);
+    box-shadow: 0px 0px 300px 200px rgba(0,0,0,0.54);
+}
+
+.vertical-center {
+    /* Alinear Verticalmente el Panel */
+    min-height: 100%;  
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+}
+
+.my-color{
+    color: white;
+    background-color: #d9354b;
+}
+
+.my-color:focus, .my-color:hover{
+    color: white;
+    background-color: #ab2739;
+  }
+
+.sub-text{
+    color: #999999;
+}
+
+.bg{
+    /* Atributos del Background */
+    position: relative;
+    background: black url('/static/videocorn/img/background.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: 0 0;
+    background-repeat: repeat-y;
+    animation: animate 60s linear infinite;
+
+    /*Para mantener detrás del resto de divs*/
+    z-index: -10;
+}
+
+/*Animaciones */
+@keyframes animate{
+    from{
+        background-position: 0 0;
+    }
+    to{
+        background-position: 0 100%;
+    }
+}
+
+
+
+
+
