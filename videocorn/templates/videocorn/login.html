@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'videocorn/css/login_style.css' %}">
+{% endblock %}
+
 {% block content %}
-
-
 
     {% if next %}
         {% if user.is_authenticated %}
@@ -13,14 +15,14 @@
         {% endif %}
     {% endif %}
 
-    <div class="container vertical-center col-xs-offset-1 col-xs-10  col-sm-offset-1 col-sm-10 col-md-offset-3 col-md-6 ol-lg-offset-3 col-lg-6">
+    <div class="container vertical-center col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
         <div class="login-panel">
 
             <div class="login-header">
-                    <img class="col-md-offset-3 col-md-6 col-xs-offset-3 col-xs-6" src="{% static 'videocorn/img/logo.png' %}" alt="logo" height="auto">
+                <img class="col-xs-offset-3 col-xs-6 col-md-offset-3 col-md-6" src="{% static 'videocorn/img/logo.png' %}" alt="logo" height="auto">
             </div>
 
-            <div class="login-body col-xs-offset-2 col-xs-8">
+            <div class="login-body col-xs-offset-1 col-xs-10">
                 <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
                     <div class ="form-group">
@@ -40,15 +42,15 @@
                     <input type="submit" value="Iniciar Sesión" class="btn my-color btn-lg col-xs-12">
                     <input type="hidden" name="next" value="{{ next }}" />
                 </form>
-            </div>
 
-            <div class="login-footer col-xs-offset-2 col-xs-8">
                 {% if form.errors %}
-                    <p>Your username and password didn't match. Please try again.</p>
+                    <center>
+                        <strong><div class="error">El username o contraseña introducidos son incorrectos.</div></strong>
+                    </center>
                 {% endif %}
-            </div>
-            
+
+            </div>      
         </div>
     </div>
-
+    <!--<div class="bg"></div>-->
 {% endblock %}
