@@ -1,12 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
+{% extends 'base.html' %}
 
-    </head>
-    <body>
-        <ul>
-            <li><strong>Movies:</strong> {{ num_movies }}</li>
-            <li><strong>Copies:</strong> {{ num_movies_selected }}</li>
-            <li><strong>Copies available:</strong> {{ num_generos }}</li>
-        </ul>
-    </body>
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'videocorn/css/home_style.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="jumbotron my-jumbotron">
+        <div class="col-xs-offset-1">
+            <h1>¡Hola, {{ user.get_username }}!</h1>
+            <p>¿Qué película quieres ver hoy?</p>
+            <form method='GET' action=''>
+                <div class ="form-group">
+                    <div class="input-group input-group-lg col-xs-11">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        <input type="text" name='title' placeholder="Título" value="{{ request.GET.title }}" class="form-control" >
+                        <span class="input-group-btn"><input class="btn btn-default" type="submit" value='Buscar'></span>
+                    </div>   
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <select class="form-control" name="genre"> 
+                            {% for genre in genre_list %}
+                                <option value="{{ genre.name }}">{{ genre.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+
+
+
+            </form>
+        </div>
+    </div>
+
+    <div class="col-xs-offset-1 col-xs-10">
+        <div class="page-header">
+            <h1>Películas</h1>
+        </div>
+        <div class="row">
+            {% for movie in movie_list %}
+                <div class="col-xs-6 col-sm-2">
+                    <a href="#" class="thumbnail">
+                        <img src="{{ movie.cover }}" alt="{{ movie.title }}_cover" width="200">
+                        <center><p> {{ movie.title }}</p></center>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+{% endblock %}

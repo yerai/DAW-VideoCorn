@@ -1,0 +1,14 @@
+html, body{
+    background-color: black;
+}
+
+.my-jumbotron{
+    background-color: #d9354b;
+    color: white;
+
+}
+
+.page-header{
+    color:#d9354b;
+}
+

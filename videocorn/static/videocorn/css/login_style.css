@@ -25,7 +25,7 @@ html, body{
     align-items: center;
 }
 
-/* Personalizacion del color de los botones */
+/* Personalizacion del color del boton */
 .my-color{
     color: white;
     background-color: #d9354b;
@@ -36,11 +36,7 @@ html, body{
     background-color: #ab2739;
   }
 
-/* Color de los diferentes textos sueltos */
-.sub-text{
-    color: grey;
-}
-
+/* Personalizacion del color del texto de error*/
 .error{
     color: #d9354b;
 }

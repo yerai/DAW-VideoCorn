@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('videocorn/', include('videocorn.urls')), 
     path('login/', views.login, {'template_name': 'login.html'}, name='login'),
+]
+
+#Add URL maps to redirect the base URL to the videocorn application
+urlpatterns += [
+    path('', RedirectView.as_view(url='/videocorn/')),
 ]
