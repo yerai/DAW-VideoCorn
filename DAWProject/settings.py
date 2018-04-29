@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'videocorn.apps.VideocornConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

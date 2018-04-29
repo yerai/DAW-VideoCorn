@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'videocorn/css/home_style.css' %}">
@@ -9,25 +10,31 @@
             <h1>¡Hola, {{ user.get_username }}!</h1>
             <p>¿Qué película quieres ver hoy?</p>
             <form method='GET' action=''>
+
                 <div class ="form-group">
                     <div class="input-group input-group-lg col-xs-11">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                        <input type="text" name='title' placeholder="Título" value="{{ request.GET.title }}" class="form-control" >
+                        {{ form.title|add_class:'form-control'}}
                         <span class="input-group-btn"><input class="btn btn-default" type="submit" value='Buscar'></span>
-                    </div>   
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <select class="form-control" name="genre"> 
-                            {% for genre in genre_list %}
-                                <option value="{{ genre.name }}">{{ genre.name }}</option>
-                            {% endfor %}
-                        </select>
                     </div>
                 </div>
                 
+                <div class="row">
+                    <div class="col col-xs-8 col-sm-2">
+                        <h4>Año de estreno:</h4>
+                        {{ form.year|add_class:'form-control' }}
+                    </div>
 
+                    <div class="col col-xs-8 col-sm-2">
+                        <h4>Género:</h4>
+                        {{ form.genre|add_class:'form-control' }}
+                    </div>
 
+                    <div class="col col-xs-8 col-sm-2">
+                        <h4>Puntuación:</h4>
+                        {{ form.score|add_class:'form-control' }}
+                    </div>
+                </div> 
 
             </form>
         </div>
