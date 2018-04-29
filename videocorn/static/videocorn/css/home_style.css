@@ -5,11 +5,30 @@ html, body{
 .my-jumbotron{
     background-color: #d9354b;
     color: white;
-
 }
 
 .page-header{
     color:#d9354b;
 }
 
+/* Thumbnails */
+.my-thumbnail{
+   padding:0px;
+   border-radius: 6px;
+   margin-bottom: 0px;
+}
+
+.my-img{
+    border-radius: 6px;
+}
+
+.my-img:hover {
+    box-shadow: 0 0 2px 1px #d9354b;
+}
+
+.my-title{
+    color:white;
+    text-align: center;
+    font-size: 18px;
+}
 

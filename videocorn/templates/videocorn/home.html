@@ -14,29 +14,44 @@
                 <div class ="form-group">
                     <div class="input-group input-group-lg col-xs-11">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                        {{ form.title|add_class:'form-control'}}
+                        <input type="text" name="title" maxlength="200" class="form-control" id="id_title" placeholder="Título..." value="{{request.GET.title}}">
                         <span class="input-group-btn"><input class="btn btn-default" type="submit" value='Buscar'></span>
                     </div>
                 </div>
-                
+
                 <div class="row">
-                    <div class="col col-xs-8 col-sm-2">
-                        <h4>Año de estreno:</h4>
-                        {{ form.year|add_class:'form-control' }}
+                    <div class="col col-xs-11 col-sm-2">
+                        <h4>Año:</h4>
+                        <select name="year" class="form-control" id="id_year">
+                            <option value="" selected="">---------</option>
+                            {% for item in year_list %}
+                                <option value="{{ item.date }}"{% if year == item.date %}selected=""{% endif %}>{{ item.date }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
 
-                    <div class="col col-xs-8 col-sm-2">
+                    <div class="col col-xs-11 col-sm-2">
                         <h4>Género:</h4>
-                        {{ form.genre|add_class:'form-control' }}
+                        <select name="genre" class="form-control" id="id_genre">
+                            <option value="" selected="">---------</option>
+                            {% for item in genre_list %}
+                                <option value="{{ item.name }}"{% if genre == item.name %}selected=""{% endif %}>{{ item.name }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
 
-                    <div class="col col-xs-8 col-sm-2">
+                    <div class="col col-xs-11 col-sm-2">
                         <h4>Puntuación:</h4>
-                        {{ form.score|add_class:'form-control' }}
+                        <select name="score" class="form-control" id="id_score">
+                            <option value="" selected="">---------</option>
+                            {% for item in score_list %}
+                                <option value="{{ item.stars }}"{% if score == item.stars %}selected=""{% endif %}>{{ item.stars }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div> 
-
             </form>
+
         </div>
     </div>
 
@@ -46,12 +61,14 @@
         </div>
         <div class="row">
             {% for movie in movie_list %}
-                <div class="col-xs-6 col-sm-2">
-                    <a href="#" class="thumbnail">
-                        <img src="{{ movie.cover }}" alt="{{ movie.title }}_cover" width="200">
-                        <center><p> {{ movie.title }}</p></center>
-                    </a>
-                </div>
+                <a href="#">
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="thumbnail my-thumbnail">
+                            <img src="{{ movie.cover }}" class="my-img" alt="{{ movie.title }}_cover">
+                        </div>
+                        <div class="my-title">{{movie.title}}</div>
+                    </div>
+                </a>
             {% endfor %}
         </div>
     </div>
