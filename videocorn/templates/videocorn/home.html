@@ -61,7 +61,7 @@
         </div>
         <div class="row">
             {% for movie in movie_list %}
-                <a href="#">
+                <a href="{{movie.id}}">
                     <div class="col-xs-6 col-sm-4">
                         <div class="thumbnail my-thumbnail">
                             <img src="{{ movie.cover }}" class="my-img" alt="{{ movie.title }}_cover">

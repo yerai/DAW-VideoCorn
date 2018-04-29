@@ -27,7 +27,7 @@ def home(request):
     if score:
         queryset_list = queryset_list.filter(score__stars=score)
 
-    # Context
+    # Contexto
     context = {
         "movie_list" : queryset_list,
         "year_list" : year_list,
@@ -44,4 +44,25 @@ def home(request):
         context,
     )
 
+@login_required
+def movie(request,pk):
+    
+    # Obtenemos la pelicula, si no existe devolvemos error
+    try:
+        movie = Movie.objects.get(id=pk)
+    except Movie.DoesNotExist:
+        raise Http404("Movie does not exist")
+    
+
+    # Contexto
+    context = {
+        "movie" : movie,
+    }
+
+    # Render the HTML template movie.html with the data in the context variable
+    return render(
+        request,
+        'videocorn/movie.html',
+        context,
+    )
 
