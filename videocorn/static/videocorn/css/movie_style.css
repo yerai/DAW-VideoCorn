@@ -2,8 +2,22 @@ html, body{
     background-color: black;
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: white;
+
+    /* Contenido centrado verticalmente */
+    height:100%;
+    margin:0;
+    padding:0;
 }
 
+ /* Contenido centrado verticalmente */
+.vertical-center {
+    min-height: 100%;  
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+}
+
+ /* Tipos de texto */
 .big-title{
     margin:15px;
     font-size: 60px;
@@ -31,6 +45,7 @@ html, body{
     font-weight: 200;
 }
 
+ /* Boton Ver Pelicula */
 .my-color{
     color: white;
     background-color: #d9354b;
@@ -38,6 +53,7 @@ html, body{
     margin-top: 30px;
 }
 
-.page-header{
-    color:#d9354b;
+ /* Imagen */
+.cover{
+    margin:15px;
 }
