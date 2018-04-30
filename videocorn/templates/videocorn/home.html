@@ -9,7 +9,7 @@
         <div class="col-xs-offset-1">
             <h1>¡Hola, {{ user.get_username }}!</h1>
             <p>¿Qué película quieres ver hoy?</p>
-            <form method='GET' action=''>
+            <form method='GET' action='/videocorn/#movies'>
 
                 <div class ="form-group">
                     <div class="input-group input-group-lg col-xs-11">
@@ -56,7 +56,7 @@
     </div>
 
     <div class="col-xs-offset-1 col-xs-10">
-        <div class="page-header">
+        <div id="movies" class="page-header">
             <h1>Películas</h1>
         </div>
         <div class="row">
