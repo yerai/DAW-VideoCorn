@@ -1,5 +1,5 @@
 html, body{
-    background-color: black;
+    background-color: #222222;
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: white;
 
@@ -52,6 +52,11 @@ html, body{
     margin: 15px;
     margin-top: 30px;
 }
+
+.my-color:focus, .my-color:hover{
+    color: white;
+    background-color: #ab2739;
+  }
 
  /* Imagen */
 .cover{

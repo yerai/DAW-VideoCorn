@@ -1,5 +1,5 @@
 html, body{
-    background-color: black;
+    background-color: #222222;
 }
 
 .my-jumbotron{
@@ -14,12 +14,12 @@ html, body{
 /* Thumbnails */
 .my-thumbnail{
    padding:0px;
-   border-radius: 6px;
+   border-radius: 0px;
    margin-bottom: 0px;
 }
 
 .my-img{
-    border-radius: 6px;
+    border-radius: 0px;
 }
 
 .my-img:hover {

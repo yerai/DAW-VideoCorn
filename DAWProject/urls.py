@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('videocorn/', include('videocorn.urls')), 
     path('login/', views.login, {'template_name': 'login.html'}, name='login'),
+    path('logout/', views.login, {'template_name': 'login.html'}, name='logout'),
 ]
 
 #Add URL maps to redirect the base URL to the videocorn application

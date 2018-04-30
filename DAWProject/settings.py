@@ -125,5 +125,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/videocorn'
+LOGOUT_REDIRECT_URL = 'logout'
 
 LOGIN_URL = '/login'

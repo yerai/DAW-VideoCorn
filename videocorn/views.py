@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Genre, Year, Score, Actor, Movie
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 @login_required
 def home(request):
@@ -65,4 +66,8 @@ def movie(request,pk):
         'videocorn/movie.html',
         context,
     )
+
+@staff_member_required
+def prueba(request):
+    print(prueba)
 
