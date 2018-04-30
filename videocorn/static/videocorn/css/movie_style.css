@@ -1,27 +1,43 @@
 html, body{
     background-color: black;
-}
-
-.my-jumbotron{
-    background-color: #d9354b;
-    color: white;
-}
-
-.my-title{
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: white;
-    margin-bottom: 15px;
+}
+
+.big-title{
+    margin:15px;
+    font-size: 60px;
+    font-weight: 500;
+    margin-right: 30px;
+}
+
+.big-text{
+    text-align: justify;
+    font-size: 22px;
+    font-weight: 200;
+    margin: 15px; 
+    margin-right: 30px;
+}
+
+.small-title{
+    margin: 15px;
     font-size: 19px;
     font-weight: 500;
-    margin: 0 15px 10px;
 }
 
-.my-text{
-    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: white;
-    margin-bottom: 15px;
+.small-text{
+    margin-right: 10px;
     font-size: 15px;
     font-weight: 200;
-    margin: 0 15px 10px;
-    
+}
+
+.my-color{
+    color: white;
+    background-color: #d9354b;
+    margin: 15px;
+    margin-top: 30px;
+}
+
+.page-header{
+    color:#d9354b;
 }

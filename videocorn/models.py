@@ -49,7 +49,7 @@ class Actor(models.Model):
         """
         String for representing the Model object (in Admin site etc.)
         """
-        return '{0}, {1}'.format(self.firstName,self.lastName)
+        return '{0} {1}'.format(self.firstName ,self.lastName)
 
 
 
