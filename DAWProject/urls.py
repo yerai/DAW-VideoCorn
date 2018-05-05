@@ -25,7 +25,7 @@ urlpatterns = [
     path('logout/', views.login, {'template_name': 'login.html'}, name='logout'),
 ]
 
-#Add URL maps to redirect the base URL to the videocorn application
+# Redirect the base URL to the videocorn application
 urlpatterns += [
     path('', RedirectView.as_view(url='/videocorn/')),
 ]

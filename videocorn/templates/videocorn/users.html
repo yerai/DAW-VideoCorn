@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'videocorn/css/user_style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="">
+        {% csrf_token %}
+
+        <!-- USERNAME -->
+        <div class ="form-group">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                {{ form.username }}
+            </div>   
+        </div>
+
+         <!-- EMAIL-->
+         <div class ="form-group">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                {{ form.email }}
+            </div>   
+         </div>
+        
+        <!-- PASSWORD -->
+        <div class ="form-group">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                {{ form.password}}
+            </div>
+        </div>
+        
+        <input type="submit" value="Crear usuario" class="btn my-color btn-lg col-xs-12" />
+    </form>
+{% endblock %}

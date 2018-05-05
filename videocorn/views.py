@@ -67,7 +67,27 @@ def movie(request,pk):
         context,
     )
 
-@staff_member_required
-def prueba(request):
-    print(prueba)
 
+from .forms import UserForm
+from django.contrib.auth.models import User
+
+@staff_member_required
+def users (request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data['username'])
+            User.objects.create_user(**form.cleaned_data)
+    else:
+        form = UserForm() 
+
+    # Contexto
+    context = {
+        "form" : form,
+    }
+
+    return render(
+        request, 
+        'videocorn/users.html',
+        context,
+    )

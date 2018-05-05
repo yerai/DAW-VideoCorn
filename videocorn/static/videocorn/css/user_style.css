@@ -1,0 +1,10 @@
+/* Personalizacion del color del boton */
+.my-color{
+    color: white;
+    background-color: #d9354b;
+}
+
+.my-color:focus, .my-color:hover{
+    color: white;
+    background-color: #ab2739;
+  }
