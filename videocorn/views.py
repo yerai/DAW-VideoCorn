@@ -6,13 +6,13 @@ from django.contrib.admin.views.decorators import staff_member_required
 @login_required
 def home(request):
 
-    #Obtenemos de la BD
+    #Obtenemos los datos de la BD para el dropdown
     queryset_list = Movie.objects.all()
     year_list = Year.objects.all().order_by('date')
     genre_list = Genre.objects.all().order_by('name')
     score_list = Score.objects.all().order_by('stars')
 
-    #Obtenemos los parametros de busqueda
+    #Obtenemos los parametros de busqueda para filtrar
     title = request.GET.get("title")
     year = request.GET.get("year")
     genre = request.GET.get("genre")
@@ -28,7 +28,7 @@ def home(request):
     if score:
         queryset_list = queryset_list.filter(score__stars=score)
 
-    # Contexto
+    # Valores a enviar al template
     context = {
         "movie_list" : queryset_list,
         "year_list" : year_list,
@@ -38,7 +38,8 @@ def home(request):
         "genre" : genre,
         "score" : score,
     }
-    # Render the HTML template home.html with the data in the context variable
+    
+    # Render
     return render(
         request,
         'videocorn/home.html',
@@ -70,19 +71,48 @@ def movie(request,pk):
 
 from .forms import UserForm
 from django.contrib.auth.models import User
+from django.contrib import messages 
+
 
 @staff_member_required
-def users (request):
+def users(request):
+
+    #Obtenemos lista de usuarios
+    user_list = User.objects.all().order_by('username')
+
+    #Obtenemos peticion
     if request.method == "POST":
         form = UserForm(request.POST)
+
+        #Si el form es valido
         if form.is_valid():
+
+            #Creamos mensaje
+            messages.success(request, 'El usuario ha sido creado satisfactoriamente.')
             print(form.cleaned_data['username'])
-            User.objects.create_user(**form.cleaned_data)
+
+            #Si la peticion es Add --> Creamos usuario
+            if request.POST['action'] == 'add':
+                User.objects.create_user(**form.cleaned_data)
+
+            #Si la peticion es Edit --> actualizamos usuario
+            if request.POST.get("action") == 'edit':
+                print("jejeje")
+                username = request.POST.get("username")
+                User.objects.filter(username=username).update()
+        
+        #Si la peticion es Delete --> Eliminamos usuario
+        if request.POST['action'] == 'delete':
+            print("holi")
+                
+
+        
     else:
         form = UserForm() 
 
     # Contexto
     context = {
+        "user_list" : user_list,
         "form" : form,
     }
 

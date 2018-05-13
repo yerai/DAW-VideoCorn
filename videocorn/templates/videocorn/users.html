@@ -4,34 +4,168 @@
     <link rel="stylesheet" href="{% static 'videocorn/css/user_style.css' %}">
 {% endblock %}
 
+{% block scripts %}
+    <script>
+        $(document).on("click", ".open-EditUsers", function (e) {
+
+            e.preventDefault();
+
+            var _self = $(this);
+
+            var myUserId = _self.data('id');
+            $("#id_UserId").val(myUserId);
+
+            $(_self.attr('href')).modal('show');
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
-    <form method="post" action="">
-        {% csrf_token %}
+<div class="container">
 
-        <!-- USERNAME -->
-        <div class ="form-group">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                {{ form.username }}
-            </div>   
-        </div>
+    <!-- HEADER -->
+    <div class="page-header">
+        <h1>Usuarios</h1>
+    </div>
 
-         <!-- EMAIL-->
-         <div class ="form-group">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                {{ form.email }}
-            </div>   
-         </div>
-        
-        <!-- PASSWORD -->
-        <div class ="form-group">
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                {{ form.password}}
+    <!-- ERROR MESSAGE -->
+    {% if form.errors %}
+        <center>
+            <div class="alert alert-danger" role="alert">El username introducido ya existe. Por favor intentelo de nuevo.</div>
+        </center>
+    {% endif %} 
+    
+    <!-- SUCCESS MESSAGE -->
+    {% if messages %} 
+        <center>
+        {% for message in messages %} 
+            <div class="alert alert-success" role="alert">{{ message }}</div> 
+        {% endfor %} 
+        </center>
+    {% endif %} 
+
+    <!-- TABLA -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in user_list %}
+                <tr>
+                    <td>{{user.username}}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <a data-id="{{user.username}}" class="open-EditUsers btn my-color btn-xs" href="#editUsers"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <input type="hidden" name="username" value="{{user.username}}">
+                            <button type="submit" class="btn my-color" name="action" value="delete"></button>
+                        </form>  
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td>
+                    <button class="btn my-color btn-sm" type="submit" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span> Añadir</button>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>      
+
+<!-- ADD MODAL -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Añadir Usuario</h2>
+            </div>
+                   
+            <div class="modal-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <center>
+                        <div class ="form-group">
+                            <div class="input-group input-group-lg col-xs-11">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                {{ form.username }}
+                            </div>   
+                        </div>
+                            
+                        <div class ="form-group">
+                            <div class="input-group input-group-lg col-xs-11">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                {{ form.email }}
+                            </div>   
+                        </div>
+                        
+                        <div class ="form-group">
+                            <div class="input-group input-group-lg col-xs-11">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                {{ form.password }}
+                            </div>
+                        </div>
+                    </center>
+            </div>
+            
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn my-color" name="action" value="add">Guardar</button>
+                </form>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal fade" id="editUsers"  role="dialog" aria-labelledby="editUsers" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Editar Usuario</h2>
+        </div>
+
+        <div class="modal-body">
+            <form method="post" action="">
+                {% csrf_token %}
+                <center>
+                    <div class ="form-group">
+                        <div class="input-group input-group-lg col-xs-11">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input type="text" class="form-control" name="username" id="id_UserId" value="" />
+                        </div>   
+                    </div>
+                        
+                    <div class ="form-group">
+                        <div class="input-group input-group-lg col-xs-11">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            {{ form.email }}
+                        </div>   
+                    </div>
+                    
+                    <div class ="form-group">
+                        <div class="input-group input-group-lg col-xs-11">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            {{ form.password }}
+                        </div>
+                    </div>
+                </center>
+            </div>
         
-        <input type="submit" value="Crear usuario" class="btn my-color btn-lg col-xs-12" />
-    </form>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn my-color" name="action" value="edit">Guardar</button>
+            </form>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
 {% endblock %}
