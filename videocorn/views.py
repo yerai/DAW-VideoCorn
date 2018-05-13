@@ -38,7 +38,7 @@ def home(request):
         "genre" : genre,
         "score" : score,
     }
-    
+
     # Render
     return render(
         request,
@@ -69,10 +69,8 @@ def movie(request,pk):
     )
 
 
-from .forms import UserForm
 from django.contrib.auth.models import User
 from django.contrib import messages 
-
 
 @staff_member_required
 def users(request):
@@ -82,38 +80,58 @@ def users(request):
 
     #Obtenemos peticion
     if request.method == "POST":
-        form = UserForm(request.POST)
 
-        #Si el form es valido
-        if form.is_valid():
+        # Añadir Usuario
+        if request.POST['action'] == 'add':
+            
+            #Obtenemos los datos
+            username = request.POST['username']
+            email = request.POST['email']
+            password = request.POST['password']
+            
+            #Creamos nuevo usuario
+            u = User(username=username, email=email, password=password)
+            u.save()
 
             #Creamos mensaje
             messages.success(request, 'El usuario ha sido creado satisfactoriamente.')
-            print(form.cleaned_data['username'])
 
-            #Si la peticion es Add --> Creamos usuario
-            if request.POST['action'] == 'add':
-                User.objects.create_user(**form.cleaned_data)
+        # Modificar Usuario
+        if request.POST['action'] == 'edit':
+            
+            #Obtenemos los datos
+            username = request.POST['username']
+            email = request.POST['email']
+            password = request.POST['password']
 
-            #Si la peticion es Edit --> actualizamos usuario
-            if request.POST.get("action") == 'edit':
-                print("jejeje")
-                username = request.POST.get("username")
-                User.objects.filter(username=username).update()
-        
-        #Si la peticion es Delete --> Eliminamos usuario
+            #Buscamos el usuario
+            u = user_list.filter(username=username)[0]
+            
+            #Modificamos usuario
+            if email:
+                u.email=email
+            
+            if password:
+                u.password=password
+            
+            u.save()
+
+            #Creamos mensaje
+            messages.success(request, 'El usuario ha sido modificado satisfactoriamente.')
+
         if request.POST['action'] == 'delete':
-            print("holi")
-                
+            #Obtenemos los datos
+            username = request.POST['username']
 
-        
-    else:
-        form = UserForm() 
+            #Eliminamos usuario
+            u = user_list.filter(username=username)[0].delete()
+
+            #Creamos mensaje
+            messages.success(request, 'El usuario ha sido eliminado satisfactoriamente.')
 
     # Contexto
     context = {
         "user_list" : user_list,
-        "form" : form,
     }
 
     return render(

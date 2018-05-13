@@ -45,12 +45,12 @@
     {% endif %} 
 
     <!-- TABLA -->
-    <table class="table">
-        <thead>
+    <table class="table table-responsive">
+        <thead class="my-thead">
             <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Action</th>
+                <th>USERNAME</th>
+                <th>EMAIL</th>
+                <th>ACCION</th>
             </tr>
         </thead>
         <tbody>
@@ -59,11 +59,11 @@
                     <td>{{user.username}}</td>
                     <td>{{ user.email }}</td>
                     <td>
-                        <a data-id="{{user.username}}" class="open-EditUsers btn my-color btn-xs" href="#editUsers"><span class="glyphicon glyphicon-pencil"></span></a>
                         <form method="post" action="">
+                            <a data-id="{{user.username}}" class="open-EditUsers btn my-color btn-xs" href="#editUsers"><span class="glyphicon glyphicon-pencil"></span></a>
                             {% csrf_token %}
                             <input type="hidden" name="username" value="{{user.username}}">
-                            <button type="submit" class="btn my-color" name="action" value="delete"></button>
+                            <button type="submit" class="btn my-color glyphicon glyphicon-trash btn-xs" name="action" value="delete"></button>
                         </form>  
                     </td>
                 </tr>
@@ -82,40 +82,40 @@
 <!-- ADD MODAL -->
 <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content my-modal">
             <div class="modal-header">
-                <h2>Añadir Usuario</h2>
+                <center><h2>Añadir Usuario</h2></center>
             </div>
                    
             <div class="modal-body">
                 <form method="post" action="">
                     {% csrf_token %}
                     <center>
-                        <div class ="form-group">
+                        <div class="form-group">
                             <div class="input-group input-group-lg col-xs-11">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                {{ form.username }}
+                                <input type="text" name="username" maxlength="150" class="form-control" placeholder="Username" required="" id="id_username">
                             </div>   
                         </div>
                             
-                        <div class ="form-group">
+                        <div class="form-group">
                             <div class="input-group input-group-lg col-xs-11">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                {{ form.email }}
+                                <input type="email" name="email" maxlength="254" class="form-control" placeholder="Email" required="" id="id_email">
                             </div>   
                         </div>
                         
-                        <div class ="form-group">
+                        <div class="form-group">
                             <div class="input-group input-group-lg col-xs-11">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                {{ form.password }}
+                                <input type="password" name="password" maxlength="128" class="form-control" placeholder="Contraseña" required="" id="id_password">
                             </div>
                         </div>
                     </center>
             </div>
             
             <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn my-color-close" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn my-color" name="action" value="add">Guardar</button>
                 </form>
             </div>
@@ -126,9 +126,12 @@
 <!-- EDIT MODAL -->
 <div class="modal fade" id="editUsers"  role="dialog" aria-labelledby="editUsers" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content my-modal">
         <div class="modal-header">
-            <h2>Editar Usuario</h2>
+            <center>
+                <h2>Editar Usuario</h2>
+                <p>Rellene unicamente los campos a modificar.</p>
+            </center>
         </div>
 
         <div class="modal-body">
@@ -138,28 +141,28 @@
                     <div class ="form-group">
                         <div class="input-group input-group-lg col-xs-11">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input type="text" class="form-control" name="username" id="id_UserId" value="" />
+                            <input type="text" class="form-control" name="username" id="id_UserId" value="" readonly="readonly">
                         </div>   
                     </div>
                         
                     <div class ="form-group">
                         <div class="input-group input-group-lg col-xs-11">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            {{ form.email }}
+                            <input type="email" name="email" maxlength="254" class="form-control" placeholder="Email" id="id_email">
                         </div>   
                     </div>
                     
                     <div class ="form-group">
                         <div class="input-group input-group-lg col-xs-11">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            {{ form.password }}
+                            <input type="password" name="password" maxlength="128" class="form-control" placeholder="Contraseña" id="id_password">
                         </div>
                     </div>
                 </center>
             </div>
         
         <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn my-color-close" data-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn my-color" name="action" value="edit">Guardar</button>
             </form>
         </div>

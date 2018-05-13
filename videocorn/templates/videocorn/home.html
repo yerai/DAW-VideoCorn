@@ -46,7 +46,7 @@
                         <select name="score" class="form-control" id="id_score">
                             <option value="" selected="">---------</option>
                             {% for item in score_list %}
-                                <option value="{{ item }}"{% if score == item.stars|stringformat:"i" %}selected=""{% endif %}>{{ item }}</option>
+                                <option value="{{ item }}"{% if score == item.stars|stringformat:"i" %}selected=""{% endif %}>{{ item }}/5</option>
                             {% endfor %}
                         </select>
                     </div>
