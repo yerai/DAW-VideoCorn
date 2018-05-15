@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'videocorn/css/movies_style.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).on("click", ".open-EditMovies", function (e) {
+
+            e.preventDefault();
+
+            var _self = $(this);
+
+            var myMovieId = _self.data('id');
+            $("#id_MovieId").val(myMovieId);
+
+            $(_self.attr('href')).modal('show');
+        });
+    </script>
+{% endblock %}
+    
+{% block content %}
+<div class="container">
+
+        <!-- HEADER -->
+        <div class="page-header">
+            <h1>Peliculas <button class="btn my-color btn-md my-action" type="submit" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span></button> </h1>
+        </div>
+
+        <!-- ERROR MESSAGE -->
+        {% if form.errors %}
+            <center>
+                <div class="alert alert-danger" role="alert">Hubo un error con el formulario. Por favor intentelo de nuevo.</div>
+            </center>
+        {% endif %} 
+        
+        <!-- MESSAGES -->
+        {% if messages %} 
+            <center>
+            {% for message in messages %} 
+
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                    <div class="alert alert-danger" role="alert">{{ message }}</div>
+                {% endif %}
+
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                <div class="alert alert-success" role="alert">{{ message }}</div> 
+                {% endif %}
+
+            {% endfor %} 
+            </center>
+        {% endif %} 
+        
+        <!-- PANEL -->
+        {% for movie in movie_list %}
+            <div class="panel my-panel">
+
+                <!-- HEADER -->
+                <div class="panel-heading my-panel-header"> 
+                    <h1 class="panel-title">
+                        {{ movie.title }} 
+                        <form method="post" action="" class="my-action">
+                            <a data-id="{{movie.title}}" class="open-EditMovies my-icon" href="#editMovies"><span class="glyphicon glyphicon-pencil"></span></a>
+                            {% csrf_token %}
+                            <input type="hidden" name="title" value="{{movie.title}}">
+                            <button type="submit" class="my-icon" name="action" value="delete"><span class="glyphicon glyphicon-trash"></span></input>
+                        </form>
+                    </h1>
+                </div>
+                
+                <!-- BODY -->
+                <div class="panel-body my-panel-body">
+                    <table class="table table-responsive">
+                        <tr>
+                            <th>Trailer:</th>
+                            <td><a href="{{movie.trailer}}">Youtube Link</a></td>
+                        </tr>
+                        <tr>
+                            <th>Resumen:</th>
+                            <td>{{movie.overview}}</td>
+                        </tr>
+                        <tr>
+                            <th>Año:</th>
+                            <td>{{movie.year}}</td>
+                        </tr>
+                        <tr>
+                            <th>Director:</th>
+                            <td>{{movie.director}}</td>
+                        </tr>
+                        <tr>
+                            <th>Cast:</th>
+                            <td>
+                                {% for actor in movie.cast.all %}
+                                    {{actor}}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Portada:</th>
+                            <td><a href="{{movie.cover}}">Link</a></td>
+                        </tr>
+                        <tr>
+                            <th>Puntuacion:</th>
+                            <td>{{movie.score}}</td>
+                        </tr>
+                        <tr>
+                            <th>Género:</th>
+                            <td>
+                                {% for genre in movie.genre.all %}
+                                    {{genre}}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    </div>    
+    
+    
+<!-- ADD MODAL -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content my-modal">
+            <div class="modal-header">
+                <center><h2>Añadir Pelicula</h2></center>
+            </div>
+                    
+            <div class="modal-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <center>
+                            <div class="form-group col-xs-11">
+                                <input type="text" name="title" maxlength="200" class="form-control input-lg" placeholder="Titulo" required="" id="id_title"> 
+                            </div>
+                                
+                            <div class="form-group col-xs-11">
+                                <input type="text" name="trailer" maxlength="1000" class="form-control input-lg" placeholder="URL de la película" required="" id="id_trailer">  
+                            </div>
+                    </center>
+            </div>
+            
+            <div class="modal-footer">
+                    <button type="button" class="btn my-color-close" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn my-color" name="action" value="add">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal fade" id="editMovies"  role="dialog" aria-labelledby="editMovies" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content my-modal">
+            <div class="modal-header">
+                <center>
+                    <h2>Editar Pelicula</h2>
+                    <p>Rellene unicamente los campos a modificar.</p>
+                </center>
+            </div>
+    
+            <div class="modal-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <center>
+                        <div class="form-group col-xs-11">
+                            <input type="text" name="title" maxlength="200" class="form-control input-lg" placeholder="Titulo" id="id_MovieId" value="" readonly="readonly"> 
+                        </div>
+                            
+                        <div class="form-group col-xs-11">
+                            <input type="text" name="trailer" maxlength="1000" class="form-control input-lg" placeholder="URL de la película" id="id_trailer">  
+                        </div>
+
+                        <div class="form-group col-xs-11">
+                            <input type="text" name="overview" maxlength="1000" class="form-control input-lg" placeholder="Resumen" id="id_overview"> 
+                        </div>
+                            
+                        <div class="form-group col-xs-11">
+                            <input type="text" name="year" class="form-control input-lg" placeholder="Año" id="id_year">  
+                        </div>
+
+                        <div class="form-group col-xs-11">
+                            <input type="text" name="director" maxlength="100" class="form-control input-lg" placeholder="Director" id="id_director">  
+                        </div>
+
+                        <div class="form-group col-xs-11">
+                            <input type="text" name="cast" maxlength="1000" class="form-control input-lg" placeholder="Cast (Separados por ',')" id="id_cast">  
+                        </div>
+
+                        <div class="form-group col-xs-11">
+                            <input type="text" name="cover" maxlength="1000" class="form-control input-lg" placeholder="URL de la portada" id="id_cover">  
+                        </div>
+
+                        <div class="form-group col-xs-11">
+                            <input type="text" name="score" class="form-control input-lg" placeholder="Puntuacion (Sobre 5 y sin decimales)" id="id_score">  
+                        </div>
+
+                        <div class="form-group col-xs-11">
+                            <input type="text" name="genre" maxlength="1000" class="form-control input-lg" placeholder="Generos (Separados por ',')" id="id_genres">  
+                        </div>
+
+                    </center>
+                </div>
+            
+            <div class="modal-footer">
+                    <button type="button" class="btn my-color-close" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn my-color" name="action" value="edit">Guardar</button>
+                </form>
+            </div>
+        
+        </div>
+    </div>
+</div>
+{% endblock %} 
+

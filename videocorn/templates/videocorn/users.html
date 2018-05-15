@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block stylesheet %}
-    <link rel="stylesheet" href="{% static 'videocorn/css/user_style.css' %}">
+    <link rel="stylesheet" href="{% static 'videocorn/css/users_style.css' %}">
 {% endblock %}
 
 {% block scripts %}
@@ -25,58 +25,71 @@
 
     <!-- HEADER -->
     <div class="page-header">
-        <h1>Usuarios</h1>
+        <h1>Usuarios <button class="btn my-color btn-md my-action" type="submit" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span></button></h1>
     </div>
 
-    <!-- ERROR MESSAGE -->
-    {% if form.errors %}
-        <center>
-            <div class="alert alert-danger" role="alert">El username introducido ya existe. Por favor intentelo de nuevo.</div>
-        </center>
-    {% endif %} 
-    
-    <!-- SUCCESS MESSAGE -->
-    {% if messages %} 
-        <center>
-        {% for message in messages %} 
-            <div class="alert alert-success" role="alert">{{ message }}</div> 
-        {% endfor %} 
-        </center>
-    {% endif %} 
+        <!-- ERROR MESSAGE -->
+        {% if form.errors %}
+            <center>
+                <div class="alert alert-danger" role="alert">Hubo un error con el formulario. Por favor intentelo de nuevo.</div>
+            </center>
+        {% endif %} 
+        
+        <!-- MESSAGES -->
+        {% if messages %} 
+            <center>
+            {% for message in messages %} 
 
-    <!-- TABLA -->
-    <table class="table table-responsive">
-        <thead class="my-thead">
-            <tr>
-                <th>USERNAME</th>
-                <th>EMAIL</th>
-                <th>ACCION</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in user_list %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                    <div class="alert alert-danger" role="alert">{{ message }}</div>
+                {% endif %}
+
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+                <div class="alert alert-success" role="alert">{{ message }}</div> 
+                {% endif %}
+
+            {% endfor %} 
+            </center>
+        {% endif %} 
+
+    <!-- PANEL -->
+    {% for user in user_list %}
+    <div class="panel my-panel">
+
+        <!-- HEADER -->
+        <div class="panel-heading my-panel-header"> 
+            <h1 class="panel-title">
+                {{ user.username }} 
+                <form method="post" action="" class="my-action">
+                    <a data-id="{{user.username}}" class="open-EditUsers my-icon" href="#editUsers"><span class="glyphicon glyphicon-pencil"></span></a>
+                    {% csrf_token %}
+                    <input type="hidden" name="username" value="{{user.username}}">
+                    <button type="submit" class="my-icon" name="action" value="delete"><span class="glyphicon glyphicon-trash"></span></input>
+                </form>
+            </h1>
+        </div>
+
+        <!-- BODY -->
+        <div class="panel-body my-panel-body">
+            <table class="table table-responsive">
                 <tr>
-                    <td>{{user.username}}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        <form method="post" action="">
-                            <a data-id="{{user.username}}" class="open-EditUsers btn my-color btn-xs" href="#editUsers"><span class="glyphicon glyphicon-pencil"></span></a>
-                            {% csrf_token %}
-                            <input type="hidden" name="username" value="{{user.username}}">
-                            <button type="submit" class="btn my-color glyphicon glyphicon-trash btn-xs" name="action" value="delete"></button>
-                        </form>  
-                    </td>
+                    <th>Email:</th>
+                    <td>{{user.email}}</td>
                 </tr>
-            {% endfor %}
-            <tr>
-                <td>
-                    <button class="btn my-color btn-sm" type="submit" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span> Añadir</button>
-                </td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+                    <th>Nombre:</th>
+                    <td>{{user.first_name}}</td>
+                </tr>
+                    <th>Apellidos:</th>
+                    <td>{{user.last_name}}</td>
+                </tr>
+                    <th>Es Staff:</th>
+                    <td>{% if user.is_staff %} Si {% else %} No {% endif %}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    {% endfor %}
 </div>      
 
 <!-- ADD MODAL -->
@@ -98,6 +111,19 @@
                             </div>   
                         </div>
                             
+                        <div class="form-group">
+                            <div class="input-group input-group-lg col-xs-11">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
+                                <input type="text" name="first_name" maxlength="254" class="form-control" placeholder="Nombre" id="id_first_name">
+                            </div>   
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group input-group-lg col-xs-11">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
+                                <input type="text" name="last_name" maxlength="254" class="form-control" placeholder="Apellidos" id="id_last_name">
+                            </div>   
+                        </div>
                         <div class="form-group">
                             <div class="input-group input-group-lg col-xs-11">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -144,7 +170,21 @@
                             <input type="text" class="form-control" name="username" id="id_UserId" value="" readonly="readonly">
                         </div>   
                     </div>
-                        
+
+                    <div class="form-group">
+                        <div class="input-group input-group-lg col-xs-11">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
+                            <input type="text" name="first_name" maxlength="254" class="form-control" placeholder="Nombre" id="id_first_name">
+                        </div>   
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group input-group-lg col-xs-11">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
+                            <input type="text" name="last_name" maxlength="254" class="form-control" placeholder="Apellidos" id="id_last_name">
+                        </div>   
+                    </div>
+
                     <div class ="form-group">
                         <div class="input-group input-group-lg col-xs-11">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>

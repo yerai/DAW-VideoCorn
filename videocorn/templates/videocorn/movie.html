@@ -23,9 +23,7 @@
             <!-- AÑO -->
             <div class="content">
                 <span class="small-title">Año:</span>
-                {% for year in movie.year.all %}
-                    <span class="small-text">{{year}}</span>
-                {% endfor %}
+                <span class="small-text">{{movie.year}}</span>
             </div>
             
             <!-- GENERO -->
@@ -39,35 +37,35 @@
             <!-- PUNTUACION -->
             <div class="content">
                 <span class="small-title">Puntuación:</span>
-                {% if movie.score.all.0.stars == '1' %}
+                {% if movie.score|slugify == '1' %}
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                 {% endif %}
-                {% if movie.score.all.0.stars == '2' %}
+                {% if movie.score|slugify == '2' %}
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                 {% endif %}
-                {% if movie.score.all.0.stars == '3' %}
+                {% if movie.score|slugify == '3' %}
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                 {% endif %}
-                {% if movie.score.all.0.stars == '4' %}
+                {% if movie.score|slugify == '4' %}
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
                 {% endif %}
-                {% if movie.score.all.0.stars == '5' %}
+                {% if movie.score|slugify == '5' %}
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>

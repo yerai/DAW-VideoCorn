@@ -19,11 +19,11 @@ class Score(models.Model):
         return str(self.stars)
 
 class Actor(models.Model):
-    firstName = models.CharField(max_length=100)
-    lastName = models.CharField(max_length=100)
-    
+    id = models.IntegerField(primary_key=True)
+    fullName = models.CharField(max_length=100)
+   
     def __str__(self):
-        return '{0} {1}'.format(self.firstName ,self.lastName)
+        return self.fullName
 
 
 
@@ -31,11 +31,11 @@ class Movie(models.Model):
     title = models.CharField(max_length=200)
     trailer = models.TextField(max_length=1000)
     overview = models.TextField(max_length=1000, null=True, blank=True)
-    year = models.ManyToManyField(Year, blank=True)
+    year = models.ForeignKey(Year, on_delete=models.CASCADE, null=True, blank=True)
     director = models.CharField(max_length = 100, null=True, blank=True)
     cast = models.ManyToManyField(Actor, blank=True)
     cover = models.TextField(max_length=1000, null=True, blank=True)
-    score = models.ManyToManyField(Score, blank=True)
+    score = models.ForeignKey(Score, on_delete=models.CASCADE, null=True, blank=True)
     genre = models.ManyToManyField(Genre, blank=True)
     
     def __str__(self):
