@@ -37,6 +37,13 @@
             <!-- PUNTUACION -->
             <div class="content">
                 <span class="small-title">Puntuación:</span>
+                {% if movie.score|slugify == '0' %}
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                {% endif %}
                 {% if movie.score|slugify == '1' %}
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>

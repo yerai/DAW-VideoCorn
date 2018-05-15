@@ -11,24 +11,20 @@ html, body{
     color:#d9354b;
 }
 
-/* Thumbnails */
-.my-thumbnail{
-   padding:0px;
-   border-radius: 0px;
-   margin-bottom: 0px;
+.my-thumbnail {
+    width: 173px;
+    height: 255px;
+    margin: 10px;
+    background-color: transparent;
 }
 
-.my-img{
-    border-radius: 0px;
+@media only screen and (max-width: 600px) {
+    .my-thumbnail {
+        width: 120px;
+        height: 175px;
+        margin: 10px;
+        background-color: transparent;
+    }
 }
 
-.my-img:hover {
-    box-shadow: 0 0 2px 1px #d9354b;
-}
-
-.my-title{
-    color:white;
-    text-align: center;
-    font-size: 18px;
-}
 

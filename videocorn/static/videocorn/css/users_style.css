@@ -74,6 +74,7 @@ html, body{
 
 .table>tbody>tr>th {
     text-align: right;
+    width:25%;
 }
 
 .table-responsive{

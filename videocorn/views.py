@@ -73,6 +73,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages 
 from django.contrib.auth.hashers import make_password
 
+@login_required
 @staff_member_required
 def users(request):
 
@@ -89,15 +90,17 @@ def users(request):
             username = request.POST['username']
 
             #Si el usuario no existe, lo creamos
-            if user_list.filter(username=username).count() != 0:
+            if user_list.filter(username=username).count() == 0:
                 email = request.POST['email']
                 password = request.POST['password']
+                first_name = request.POST['first_name']
+                last_name = request.POST['last_name']
 
                 #Hacemos el hash de la contraseña
                 password_hash = make_password(password)
                 
                 #Creamos nuevo usuario
-                u = User(username=username, email=email, password=password_hash)
+                u = User(username=username, email=email, password=password_hash, first_name=first_name, last_name=last_name)
                 u.save()
 
                 #Creamos mensaje
@@ -166,6 +169,7 @@ def users(request):
 import http.client
 import json
 
+@login_required
 @staff_member_required
 def movies(request):
 
