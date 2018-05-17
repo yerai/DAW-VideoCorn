@@ -201,7 +201,7 @@ def movies(request):
 
             #Si la pelicula existe en la base de datos de la API
             if themovie['total_results'] != 0:
-
+               
                 #Obtenemos el titulo original
                 title = themovie['results'][0]['title']
 
@@ -239,12 +239,13 @@ def movies(request):
                     themovie_cast= json.loads(data)
 
                     #Obtenemos el director
-                    director = themovie_cast['crew'][0]['name']
-
-                    #Obtenemos el cast
+                    director = []
                     cast = []
-                    for actor in themovie_cast['cast'][:4]:
-                        cast.append(Actor(id=actor['id'],fullName=actor['name']))
+                    if themovie_cast ['cast']:
+                        director = themovie_cast['crew'][0]['name']
+                        #Obtenemos el cast
+                        for actor in themovie_cast['cast'][:4]:
+                            cast.append(Actor(id=actor['id'],fullName=actor['name']))
                 
                     #Creamos una nueva pelicula
                     m = Movie(title=title, trailer=trailer, overview=overview, year=year, director=director, cover=cover, score=score)
