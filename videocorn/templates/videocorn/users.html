@@ -59,33 +59,37 @@
         <!-- HEADER -->
         <div class="panel-heading my-panel-header"> 
             <h1 class="panel-title">
-                {{ user.username }} 
+                {% if user.is_staff %}<span class="glyphicon glyphicon-king"></span>{% else %} <span class="glyphicon glyphicon-pawn"></span>{% endif %}
+                {{ user.username }}
                 <form method="post" action="" class="my-action">
                     <a data-id="{{user.username}}" class="open-EditUsers my-icon" href="#editUsers"><span class="glyphicon glyphicon-pencil"></span></a>
                     {% csrf_token %}
                     <input type="hidden" name="username" value="{{user.username}}">
                     <button type="submit" class="my-icon" name="action" value="delete"><span class="glyphicon glyphicon-trash"></span></input>
                 </form>
+                <button data-toggle="collapse" data-target="#{{user.id}}" class="my-icon my-action"><span class="glyphicon glyphicon-eye-open"></span></button>
             </h1>
         </div>
 
         <!-- BODY -->
-        <div class="panel-body my-panel-body">
-            <table class="table table-responsive">
-                <tr>
-                    <th>Email:</th>
-                    <td>{{user.email}}</td>
-                </tr>
-                    <th>Nombre:</th>
-                    <td>{{user.first_name}}</td>
-                </tr>
-                    <th>Apellidos:</th>
-                    <td>{{user.last_name}}</td>
-                </tr>
-                    <th>Es Staff:</th>
-                    <td>{% if user.is_staff %} Si {% else %} No {% endif %}</td>
-                </tr>
-            </table>
+        <div id="{{user.id}}" class="collapse">
+            <div class="panel-body my-panel-body">
+                <table class="table table-responsive">
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{user.email}}</td>
+                    </tr>
+                        <th>Nombre:</th>
+                        <td>{{user.first_name}}</td>
+                    </tr>
+                        <th>Apellidos:</th>
+                        <td>{{user.last_name}}</td>
+                    </tr>
+                        <th>Es Staff:</th>
+                        <td>{% if user.is_staff %} Si {% else %} No {% endif %}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 

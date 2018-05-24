@@ -1,55 +1,74 @@
-{% extends 'base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% block stylesheet %}
-    <link rel="stylesheet" href="{% static 'videocorn/css/login_style.css' %}">
-{% endblock %}
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="Practica Diseño de Aplicaciones Web, 2018. Universidad Politecnica de Madrid">
+        <meta name="author" content="Javier Perez Gonzalo & Yerai Zamorano Graña">
+        <title>VIDEOCORN</title>
 
-{% block content %}
-    <div class="container vertical-center col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
-        <div class="login-panel">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-            <!-- HEADER -->
-            <img class="col-xs-offset-3 col-xs-6 col-md-offset-3 col-md-6" src="{% static 'videocorn/img/logo.png' %}" alt="logo" height="auto">
-            
-            <!-- BODY -->
-            <div class="col-xs-offset-1 col-xs-10">
-                <form method="post" action="{% url 'login' %}">
-                    {% csrf_token %}
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="{% static 'videocorn/css/login_style.css' %}">
 
-                    <!-- USERNAME -->
-                    <div class ="form-group">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="id_username" type="text" class="form-control" name="username" placeholder="Username" maxlength="30" required="">
-                        </div>   
-                    </div>
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'videocorn/img/favicon.png' %}"/>
 
-                    <!-- PASSWORD -->
-                    <div class ="form-group">
-                        <div class="input-group input-group-lg">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="id_password" type="password" class="form-control" name="password" placeholder="Contraseña" required="">
+        <!-- Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    </head>
+
+    <body>
+        <div class="container vertical-center col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
+            <div class="login-panel">
+    
+                <!-- HEADER -->
+                <img class="col-xs-offset-3 col-xs-6 col-md-offset-3 col-md-6" src="{% static 'videocorn/img/logo.png' %}" alt="logo" height="auto">
+                
+                <!-- BODY -->
+                <div class="col-xs-offset-1 col-xs-10">
+                    <!-- ERROR MESSAGE -->
+                    {% if form.errors %}
+                        <center>
+                            <div class="alert alert-danger" role="alert">El username o contraseña introducidos son incorrectos.</div>
+                        </center>
+                    {% endif %} 
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+    
+                        <!-- USERNAME -->
+                        <div class ="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="id_username" type="text" class="form-control" name="username" placeholder="Username" maxlength="30" required="">
+                            </div>   
                         </div>
-                    </div>
-
-                    <!-- BUTTON -->
-                    <input type="submit" value="Iniciar Sesión" class="btn my-color btn-lg col-xs-12">
-                    <input type="hidden" name="next" value="{{ next }}" />
-                </form>
-
-                <!-- ERROR -->
-                {% if form.errors %}
-                    <center>
-                        <strong>
-                            <div class="error">
-                                El username o contraseña introducidos son incorrectos.
+    
+                        <!-- PASSWORD -->
+                        <div class ="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="id_password" type="password" class="form-control" name="password" placeholder="Contraseña" required="">
                             </div>
-                        </strong>
-                    </center>
-                {% endif %}
-
-            </div>      
+                        </div>
+    
+                        <!-- BUTTON -->
+                        <input type="submit" value="Iniciar Sesión" class="btn my-color btn-lg col-xs-12">
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+                </div>      
+            </div>
         </div>
-    </div>
-    <div class="bg"></div>
-{% endblock %}
+        <div class="bg"></div>
+       
+    </body>
+
+</html>

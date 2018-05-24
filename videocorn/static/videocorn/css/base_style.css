@@ -1,0 +1,83 @@
+html, body{
+    background-color: #222222;
+    color: white;
+}
+
+/* Personalizacion del color del boton */
+.my-color{
+    color: white;
+    background-color: #d9354b;
+}
+
+.my-color:focus, .my-color:hover{
+    color: white;
+    background-color: #ab2739;
+  }
+
+/* Personalización del Modal */
+.my-modal{
+    background-color: #222222;
+}
+
+.modal-header {
+    border-bottom: 0px solid #e5e5e5;
+}
+  
+.modal-footer {
+    border-top: 0px solid #e5e5e5;
+}
+
+/* Personalizacion del color del boton de Cerrar del Modal */
+.my-color-close{
+    color: white;
+    background-color: #222222;
+}
+
+.my-color-close:focus, .my-color-close:hover{
+    color: #d9354b;
+    background-color: #222222;
+}
+
+/* Personalizacion del Panel */
+.my-panel-header{
+    color: #fff;
+    background-color: #d9354b;
+    border-color: #d9354b;
+}
+
+.my-panel-body{
+    background-color:#222222;
+    border-color:#d9354b;
+    padding: 10px;
+}
+
+.my-panel{
+    border: 3px solid #d9354b;
+    background-color: #d9354b;
+}
+
+.my-action{
+    float: right;
+}
+
+.my-icon{
+    margin-left: 10px;
+    color:white;
+    background-color: transparent;
+    border: 0px;
+}
+
+/* Personalizacion de Alertas */
+.alert-success {
+    color: #157A6E;
+    background-color: #222222;
+    border-color: #157A6E;
+    border: 3px solid;
+}
+
+.alert-danger {
+    color: #d9354b;
+    background-color: #222222;
+    border-color: #d9354b;
+    border: 3px solid;
+}

@@ -1,7 +1,5 @@
 html, body{
-    background-color: #222222;
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: white;
 
     /* Contenido centrado verticalmente */
     height:100%;
@@ -45,18 +43,11 @@ html, body{
     font-weight: 200;
 }
 
- /* Boton Ver Pelicula */
+/* Boton Ver Pelicula */
 .my-color{
-    color: white;
-    background-color: #d9354b;
     margin: 15px;
     margin-top: 30px;
 }
-
-.my-color:focus, .my-color:hover{
-    color: white;
-    background-color: #ab2739;
-  }
 
  /* Imagen */
 .cover{

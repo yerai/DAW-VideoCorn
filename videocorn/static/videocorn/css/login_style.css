@@ -6,7 +6,7 @@ html, body{
 
 /* Panel Central */
 .login-panel{
-    background-color: black;
+    background-color: #222222;
     border-radius: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -36,9 +36,13 @@ html, body{
     background-color: #ab2739;
   }
 
-/* Personalizacion del color del texto de error*/
-.error{
+
+/* Personalizacion de Alertas */
+.alert-danger {
     color: #d9354b;
+    background-color: #222222;
+    border-color: #d9354b;
+    border: 3px solid;
 }
 
 /* Background */
@@ -64,6 +68,8 @@ html, body{
         background-position: 0 100%;
     }
 }
+
+
 
 
 

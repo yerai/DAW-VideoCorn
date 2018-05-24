@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
         <!-- Custom styles -->
+        <link rel="stylesheet" href="{% static 'videocorn/css/base_style.css' %}">
         {% block stylesheet %}
         {% endblock %}
 
@@ -30,7 +31,7 @@
     </head>
 
     <body>
-        
+        <!-- Navbar -->
         <nav role="navigation" class="nav navbar-inverse ">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/videocorn/">
@@ -44,18 +45,40 @@
             </div>
             <div class="collapse navbar-collapse" id=".navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a data-toggle="modal" data-target="#credits"><span class="glyphicon glyphicon-bullhorn"></span> Creditos</a></li>
                     {% if user.is_staff %}
-                        <li><a href="/videocorn/movies/">Peliculas</a></li>
-                        <li><a href="/videocorn/users/">Usuarios</a></li>
+                        <li><a href="/videocorn/movies/"><span class="glyphicon glyphicon-film"></span> Peliculas</a></li>
+                        <li><a href="/videocorn/users/"><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
                     {% endif %}
-                    <li><a href="{% url 'logout' %}">Salir</a></li>
+                    <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
                 </ul>
             </div>
-               
         </nav>
 
         {% block content %}
         {% endblock %}
+
+        <!-- Credits Modal -->
+        <div class="modal fade" id="credits" tabindex="-1" role="dialog" aria-labelledby="credits" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content my-modal">
+                <div class="modal-header">
+                    <center><h2>Creditos</h2></center>
+                </div>
+                        
+                <div class="modal-body">
+                    <center>
+                        <a href="https://www.themoviedb.org/"><img src="{% static 'videocorn/img/the_movie_db.png' %}"></a>
+                        <p>This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
+                    </center>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn my-color" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
     </body>
 
 </html>
