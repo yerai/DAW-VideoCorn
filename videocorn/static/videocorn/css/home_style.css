@@ -7,30 +7,45 @@
     color:#d9354b;
 }
 
-.my-img{
-    border: 2px solid #eeeeee;
+.my-pic{
+    display:block;
+    margin: auto;
+    margin-top: 15px;
+    width: 165px;
+    height: 246px;
+    border: 4px solid;
 }
 
-.my-img:focus, .my-img:hover{
+.my-pic:focus, .my-pic:hover{
     border: 4px solid #d9354b;
   }
 
-.my-thumbnail {
-    width: 173px;
-    height: 255px;
-    margin: 10px;
-    background-color: transparent;
-    border: 0px;
-}
-
-@media only screen and (max-width: 600px) {
-    .my-thumbnail {
-        width: 120px;
-        height: 175px;
-        margin: 10px;
-        background-color: transparent;
-        border: 0px;
+@media only screen and (max-width: 915px) {
+    .my-pic{
+        display:block;
+        margin: auto;
+        margin-top: 15px;
+        width: 130px;
+        height: 194px;
+        border: 4px solid;
     }
 }
 
+@media only screen and (max-width: 600px) {
+    .my-pic{
+        display:block;
+        margin: auto;
+        margin-top: 15px;
+        width: 90px;
+        height: 134px;
+        border: 4px solid;
+    }
+}
 
+a {
+    color: white;
+}
+
+.container {
+    margin-bottom: 30px;
+}

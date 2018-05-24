@@ -95,7 +95,7 @@
                                 <th>Cast:</th>
                                 <td>
                                     {% for actor in movie.cast.all %}
-                                        {{actor}}
+                                        {{actor}}{% if movie.cast.all.last != actor %},{% endif %}
                                     {% endfor %}
                                 </td>
                             </tr>
@@ -111,7 +111,7 @@
                                 <th>Género:</th>
                                 <td>
                                     {% for genre in movie.genre.all %}
-                                        {{genre}}
+                                        {{genre}}{% if movie.genre.all.last != genre %},{% endif %}
                                     {% endfor %}
                                 </td>
                             </tr>

@@ -60,15 +60,23 @@
         <div id="movies" class="page-header">
             <h1>Películas</h1>
         </div>
-    
-        {% for movie in movie_list %}
-            <a href="{{movie.id}}">
-                <div class="thumbnail my-thumbnail col-xs-6 col-sm-3">
-                    <img class="my-img" src="{{movie.cover}}" alt="Image" />
-                </div>
-                
-            </a>       
-        {% endfor %}      
+
+        <div class="container col-xs-12">
+
+            {% if movie_list %}
+                {% for movie in movie_list %}
+                    <a href="{{movie.id}}">  
+                        <div class="col-xs-6 col-sm-3">
+                            <img src="{{movie.cover}}" class="my-pic">
+                        </div>  
+                    </a>
+                {% endfor %}
+            {% else %}
+                <center>
+                    <div class="alert alert-danger" role="alert">No se encontraron películas.</div>
+                </center>
+            {% endif %}
+        </div>
     </div> 
 
 {% endblock %}
