@@ -41,6 +41,18 @@
                             <div class="alert alert-danger" role="alert">El username o contraseña introducidos son incorrectos.</div>
                         </center>
                     {% endif %} 
+
+                    <!-- MESSAGES -->
+                    {% if messages %} 
+                        <center>
+                        {% for message in messages %} 
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+                                <div class="alert alert-danger" role="alert">{{ message }}</div>
+                            {% endif %}
+                        {% endfor %} 
+                        </center>
+                    {% endif %} 
+                    
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
     

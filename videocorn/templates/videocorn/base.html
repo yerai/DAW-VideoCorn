@@ -46,7 +46,8 @@
             <div class="collapse navbar-collapse" id=".navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a data-toggle="modal" data-target="#credits"><span class="glyphicon glyphicon-bullhorn"></span> Creditos</a></li>
-                    {% if user.is_staff %}
+                    {% load  group_tags %}
+                    {% if request.user|is_admin %}
                         <li><a href="/videocorn/movies/"><span class="glyphicon glyphicon-film"></span> Peliculas</a></li>
                         <li><a href="/videocorn/users/"><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
                     {% endif %}

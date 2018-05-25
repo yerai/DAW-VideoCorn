@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load group_tags %}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'videocorn/css/users_style.css' %}">
@@ -7,14 +8,10 @@
 {% block scripts %}
     <script>
         $(document).on("click", ".open-EditUsers", function (e) {
-
             e.preventDefault();
-
             var _self = $(this);
-
             var myUserId = _self.data('id');
             $("#id_UserId").val(myUserId);
-
             $(_self.attr('href')).modal('show');
         });
     </script>
@@ -59,7 +56,7 @@
         <!-- HEADER -->
         <div class="panel-heading my-panel-header"> 
             <h1 class="panel-title">
-                {% if user.is_staff %}<span class="glyphicon glyphicon-king"></span>{% else %} <span class="glyphicon glyphicon-pawn"></span>{% endif %}
+                {% if user|is_admin %}<span class="glyphicon glyphicon-king"></span>{% else %} <span class="glyphicon glyphicon-pawn"></span>{% endif %}
                 {{ user.username }}
                 <form method="post" action="" class="my-action">
                     <a data-id="{{user.username}}" class="open-EditUsers my-icon" href="#editUsers"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -85,8 +82,8 @@
                         <th>Apellidos:</th>
                         <td>{{user.last_name}}</td>
                     </tr>
-                        <th>Es Staff:</th>
-                        <td>{% if user.is_staff %} Si {% else %} No {% endif %}</td>
+                        <th>Es Administrador:</th>
+                        <td>{% if user|is_admin %} Si {% else %} No {% endif %}</td>
                     </tr>
                 </table>
             </div>

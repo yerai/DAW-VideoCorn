@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .models import Genre, Year, Score, Actor, Movie
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
+from .decorators import admin_required, videocorn_required
 
 @login_required
+@videocorn_required
 def home(request):
 
     #Obtenemos los datos de la BD para el dropdown
@@ -47,6 +48,7 @@ def home(request):
     )
 
 @login_required
+@videocorn_required
 def movie(request,pk):
     
     # Obtenemos la pelicula, si no existe devolvemos error
@@ -69,12 +71,12 @@ def movie(request,pk):
     )
 
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib import messages 
 from django.contrib.auth.hashers import make_password
 
 @login_required
-@staff_member_required
+@admin_required
 def users(request):
 
     #Obtenemos lista de usuarios
@@ -102,6 +104,10 @@ def users(request):
                 #Creamos nuevo usuario
                 u = User(username=username, email=email, password=password_hash, first_name=first_name, last_name=last_name)
                 u.save()
+                
+                #Lo añadimos al grupo correspondiente
+                group = Group.objects.get(name='usuario_videocorn') 
+                group.user_set.add(u)
 
                 #Creamos mensaje
                 messages.success(request, 'El usuario ha sido creado satisfactoriamente.')
@@ -153,7 +159,7 @@ def users(request):
 
             #Creamos mensaje
             messages.success(request, 'El usuario ha sido eliminado satisfactoriamente.')
-
+           
     # Contexto
     context = {
         "user_list" : user_list,
@@ -170,7 +176,7 @@ import http.client
 import json
 
 @login_required
-@staff_member_required
+@admin_required
 def movies(request):
 
     #Obtenemos lista de peliculas
