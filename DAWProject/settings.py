@@ -123,8 +123,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-LOGIN_REDIRECT_URL = '/videocorn'
-LOGOUT_REDIRECT_URL = 'logout'
-
-LOGIN_URL = '/login'

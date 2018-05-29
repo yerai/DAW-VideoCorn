@@ -35,12 +35,6 @@
                 
                 <!-- BODY -->
                 <div class="col-xs-offset-1 col-xs-10">
-                    <!-- ERROR MESSAGE -->
-                    {% if form.errors %}
-                        <center>
-                            <div class="alert alert-danger" role="alert">El username o contraseña introducidos son incorrectos.</div>
-                        </center>
-                    {% endif %} 
 
                     <!-- MESSAGES -->
                     {% if messages %} 
@@ -53,7 +47,7 @@
                         </center>
                     {% endif %} 
                     
-                    <form method="post" action="{% url 'login' %}">
+                    <form method="POST" action="">
                         {% csrf_token %}
     
                         <!-- USERNAME -->

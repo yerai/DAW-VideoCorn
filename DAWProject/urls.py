@@ -15,17 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from django.contrib.auth import views
 from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('videocorn/', include('videocorn.urls')), 
-    path('login/', views.login, {'template_name': 'login.html'}, name='login'),
-    path('logout/', views.login, {'template_name': 'login.html'}, name='logout'),
 ]
 
 # Redirect the base URL to the videocorn application
 urlpatterns += [
-    path('', RedirectView.as_view(url='/videocorn/')),
+    path('', RedirectView.as_view(url='/videocorn/log_in')),
 ]

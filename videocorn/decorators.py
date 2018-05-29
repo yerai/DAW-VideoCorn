@@ -18,5 +18,5 @@ def videocorn_required(function):
         else:
             #Creamos mensaje
             messages.error(request, 'Este usuario no tiene acceso a Videocorn.')
-            return redirect('login')
+            return redirect('log_in')
     return wrap

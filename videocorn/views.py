@@ -1,9 +1,56 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Genre, Year, Score, Actor, Movie
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from .decorators import admin_required, videocorn_required
+from django.contrib import messages 
+from django.contrib.auth.hashers import make_password
+import http.client
+import json
+from django.contrib.auth import authenticate, login, logout
 
-@login_required
+def log_in(request):
+
+    #Comprobamos que el usuario este autenticado
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        #Si no lo esta e intenta hacerlo obtenemos sus credenciales
+        if request.method == "POST":
+            username = request.POST['username']
+            password = request.POST['password']
+            
+            #Comprobamos sus credenciales
+            user = authenticate(request, username=username, password=password)
+
+            #Si el usuario existe
+            if user is not None:
+                #Y tiene permisos
+                if (user.groups.filter(name='administrador').exists()) or (user.groups.filter(name='usuario_videocorn').exists()):
+                    #Se logea y redirecciona a home
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    #Si no, creamos mensaje de error
+                    messages.error(request, 'Este usuario no tiene acceso a Videocorn.')
+                    return redirect('log_in')
+            else:
+                #Si no, creamos mensaje de error
+                messages.error(request, 'El usuario o contraseña introducidos son incorrectos.')
+                return redirect('log_in')
+
+        #En caso de que no se haya autenticado todavia, mostramos el login
+        else:
+            return render(
+                request,
+                'videocorn/login.html',
+            ) 
+
+def log_out(request):
+    logout(request)
+    return redirect('log_in')
+
+@login_required(login_url='/videocorn/log_in/')
 @videocorn_required
 def home(request):
 
@@ -47,7 +94,7 @@ def home(request):
         context,
     )
 
-@login_required
+@login_required(login_url='/videocorn/log_in/')
 @videocorn_required
 def movie(request,pk):
     
@@ -70,12 +117,7 @@ def movie(request,pk):
         context,
     )
 
-
-from django.contrib.auth.models import User, Group
-from django.contrib import messages 
-from django.contrib.auth.hashers import make_password
-
-@login_required
+@login_required(login_url='/videocorn/log_in/')
 @admin_required
 def users(request):
 
@@ -171,11 +213,7 @@ def users(request):
         context,
     )
 
-
-import http.client
-import json
-
-@login_required
+@login_required(login_url='/videocorn/log_in/')
 @admin_required
 def movies(request):
 
