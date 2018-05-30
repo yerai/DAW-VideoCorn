@@ -7,6 +7,7 @@
     color:#d9354b;
 }
 
+/* Fotos de mismo tamaño */
 .my-pic{
     display:block;
     margin: auto;
@@ -18,8 +19,61 @@
 
 .my-pic:focus, .my-pic:hover{
     border: 4px solid #d9354b;
-  }
+}
 
+/* Links */
+a {
+    color: white;
+}
+a:focus, a:hover {
+    color: #d9354b;
+}
+
+/* Margen del final */
+.container {
+    margin-bottom: 30px;
+}
+
+/* Texto sobre fotos */
+.overlay {
+    display:block;
+    position:absolute;
+    left:0;
+    right:0;
+    margin: auto;
+    margin-top: 15px;
+    width: 165px;
+    height: 246px;
+    border: 4px solid;
+    opacity:0;
+}
+
+.overlay:hover {
+    display:block;
+    position:absolute;
+    left:0;
+    right:0;
+    margin: auto;
+    margin-top: 15px;
+    width: 165px;
+    height: 246px;
+    border: 4px solid;
+    background-color:black;
+    opacity:0.8;
+}
+
+.text{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+      
+}
+
+/* Ajustes para tamaños de pantalla */
 @media only screen and (max-width: 915px) {
     .my-pic{
         display:block;
@@ -28,6 +82,33 @@
         width: 130px;
         height: 194px;
         border: 4px solid;
+    }
+
+    .overlay {
+        display:block;
+        position:absolute;
+        left:0;
+        right:0;
+        margin: auto;
+        margin-top: 15px;
+        width: 130px;
+        height: 194px;
+        border: 4px solid;
+        opacity:0;
+    }
+    
+    .overlay:hover {
+        display:block;
+        position:absolute;
+        left:0;
+        right:0;
+        margin: auto;
+        margin-top: 15px;
+        width: 130px;
+        height: 194px;
+        border: 4px solid;
+        background-color:black;
+        opacity:0.8;
     }
 }
 
@@ -40,12 +121,34 @@
         height: 134px;
         border: 4px solid;
     }
+
+    .overlay {
+        display:block;
+        position:absolute;
+        left:0;
+        right:0;
+        margin: auto;
+        margin-top: 15px;
+        width: 90px;
+        height: 134px;
+        border: 4px solid;
+        opacity:0;
+    }
+    
+    .overlay:hover {
+        display:block;
+        position:absolute;
+        left:0;
+        right:0;
+        margin: auto;
+        margin-top: 15px;
+        width: 90px;
+        height: 134px;
+        border: 4px solid;
+        background-color:black;
+        opacity:0.8;
+    }
 }
 
-a {
-    color: white;
-}
 
-.container {
-    margin-bottom: 30px;
-}
+

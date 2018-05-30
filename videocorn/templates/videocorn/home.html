@@ -10,7 +10,7 @@
             <h1>¡Hola, {{ user.get_username }}!</h1>
             <p>¿Qué película quieres ver hoy?</p>
 
-            <form method='GET' action='/videocorn/#movies'>
+            <form method='GET' action='/videocorn/home/#movies'>
 
                 <div class ="form-group">
                     <div class="input-group input-group-lg col-xs-11">
@@ -67,8 +67,11 @@
                 {% for movie in movie_list %}
                     <a href="{{movie.id}}">  
                         <div class="col-xs-6 col-sm-3">
+                            <div class="overlay">
+                                <div class="text">{{movie.title}}</div>
+                            </div>
                             <img src="{{movie.cover}}" class="my-pic">
-                        </div>  
+                        </div> 
                     </a>
                 {% endfor %}
             {% else %}
