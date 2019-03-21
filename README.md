@@ -5,7 +5,7 @@
 to an online video store. This platform will display multimedia information obtained both 
 from Youtube and The Movie Database. <p>
   
-![alt text](https://github.com/yerai/yerai.github.io/blob/master/images/project-newspaper.png?raw=true)
+![alt text](https://github.com/yerai/yerai.github.io/blob/master/images/video-corn.jpg?raw=true)
   
 
 <h3>Non-functional requirements</h3>
