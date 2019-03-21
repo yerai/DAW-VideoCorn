@@ -1,7 +1,7 @@
 <h1>Web Applications - VideoCorn</h1>
 
 <h3>Goal</h3>
-<p>he aim of this project is to implement a web application similar 
+<p>The aim of this project is to implement a web application similar 
 to an online video store. This platform will display multimedia information obtained both 
 from Youtube and The Movie Database. <p>
   
